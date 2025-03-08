@@ -33,8 +33,8 @@ const Contact = () => {
             <div className='bg-[#eff2ff] pt-12 pb-8 md:pb-12'>
            <div className='mx-auto max-w-5xl flex flex-col gap-10 md:flex-row bg-white rounded p-10 items-center justify-between shadow-lg'>
            <div className='md:w-2/3 text-center md:text-left'>
-        <h3 className='text-3xl text-[#6878d6] font-bold mb-5'>Would you like to start a project with us?</h3>
-        <p className='text-gray-800'>Etiam erat lectus, finibus eget commodo quis, tincidunt eget leo. Nullam quis vulputate orci, ac accumsan quam. Morbi fringilla congue libero.
+        <h3 className='text-2xl md:text-3xl text-[#6878d6] font-bold mb-5'>Would you like to start a project with us?</h3>
+        <p className='text-gray-800 text-sm md:text-lg'>Etiam erat lectus, finibus eget commodo quis, tincidunt eget leo. Nullam quis vulputate orci, ac accumsan quam. Morbi fringilla congue libero.
         1-800-1234-567</p>
             </div>
             <div className=''>

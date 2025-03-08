@@ -5,7 +5,7 @@ const Banner1 = () => {
         <div>
         <div className="hero min-h-[400px]">
   <div className="text-center">
-    <div className="max-w-2xl">
+    <div className="max-w-xl md:max-w-2xl">
       <h1 className="text-4xl md:text-5xl font-bold">Services</h1>
       <h2 className='text-xl md:text-2xl font-bold mt-10'>We provide a wide range of Services</h2>
       <p className="py-6 md:text-lg">
