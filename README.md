@@ -1,12 +1,38 @@
-# React + Vite
+# Digital Agency Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a responsive digital agency website built with React. It features smooth navigation, dynamic banners, and background images based on the current route. The website includes a navigation bar with links to Home, Services, About, and Contact pages, a responsive design for mobile and desktop, and a call-to-action button for requesting a quote.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You can view the live version of the website here:
 
-## Expanding the ESLint configuration
+[**Live Demo Link**](your-live-site-link.com)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- **Dynamic Backgrounds**: The background changes based on the route, providing a personalized experience for the user.
+- **Responsive Design**: The layout adjusts to both desktop and mobile screen sizes.
+- **Navigation Bar**: A fixed navbar that displays the logo and navigation links. On mobile, the navbar is collapsible into a hamburger menu.
+- **Interactive Call-to-Action**: A "REQUEST QUOTE" button is available for users to interact with.
+- **Custom Banners**: Different banners are displayed on each page based on the current route.
+- **Smooth Animation**: Routes transition smoothly with an animation on page load.
+
+## Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **React Router**: For handling routing and navigation within the application.
+
+## Setup and Installation
+
+### Prerequisites
+
+- **Node.js**: Install Node.js from [here](https://nodejs.org/).
+- **npm**: Node package manager (comes with Node.js installation).
+
+### Steps
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/digital-agency-website.git
