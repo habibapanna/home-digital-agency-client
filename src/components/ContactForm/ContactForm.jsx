@@ -92,7 +92,7 @@ const ContactForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-700 bg-stone-100"
+                className="w-full px-3 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-500 bg-stone-100"
                 required
               />
               {errors.name && <span className="text-red-500 text-sm mt-2">{errors.name}</span>}
@@ -106,7 +106,7 @@ const ContactForm = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-3 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-700 bg-stone-100"
+                className="w-full px-3 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-500 bg-stone-100"
                 required
               />
               {errors.email && <span className="text-red-500 text-sm mt-2">{errors.email}</span>}
@@ -119,7 +119,7 @@ const ContactForm = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full px-3 py-10 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-700 bg-stone-100"
+                className="w-full px-3 py-10 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-500 bg-stone-100"
                 required
               />
               {errors.message && <span className="text-red-500 mt-2">{errors.message}</span>}
