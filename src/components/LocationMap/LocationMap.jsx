@@ -6,7 +6,7 @@ const LocationMap = () => {
       
 
       {/* Google Maps Embed (No API Key Required) */}
-      <div className="w-full max-w-3xl h-96 overflow-hidden rounded-lg shadow-lg">
+      <div className="w-full max-w-3xl h-96 overflow-hidden shadow-lg">
         <iframe
           title="Google Map Location"
           className="w-full h-full"

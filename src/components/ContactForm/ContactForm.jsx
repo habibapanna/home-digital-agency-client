@@ -76,7 +76,7 @@ const ContactForm = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-semibold text-center mb-10 text-[#242a56] ">Request Free Consultation</h2>
+      <h2 className="text-2xl font-semibold text-center mb-10 text-[#242a56] ">Request Free Consultation</h2>
       <div className="max-w-2xl mx-auto p-10 bg-white shadow-lg">
         {success ? (
           <div className="text-center text-gray-700">
