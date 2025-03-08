@@ -14,7 +14,7 @@ const Leader = () => {
                 <div className="pt-10 md:pt-16">
       <div className="text-center max-w-7xl mx-auto mb-12 pt-10 pb-5">
         <h1 className="text-4xl md:text-5xl font-bold text-[#242a56]">Meet Our Leadership</h1>
-        <p className="text-gray-700 px-4 md;text-lg mt-5">
+        <p className="text-gray-700 px-4 md:text-lg mt-5 max-w-2xl mx-auto">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse et justo. Praesent mattis commodo augue.​
         </p>
       </div>
