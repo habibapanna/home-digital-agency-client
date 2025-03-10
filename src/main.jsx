@@ -10,6 +10,13 @@ import Home from './pages/Home/Home.jsx';
 import About from './pages/About/About.jsx';
 import Services from './pages/Services/Services.jsx';
 import Contact from './pages/Contact/Contact.jsx';
+import Login from './pages/Login/Login.jsx';
+import Register from './pages/Register/Register.jsx';
+import AuthProvider from './context/AuthProvider.jsx';
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import AddPage from './pages/AddPage/AddPage.jsx';
+import EditPage from './pages/EditPage/EditPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +40,26 @@ const router = createBrowserRouter([
         path: "Contact",
         element: <Contact></Contact>
       },
+      {
+        path: "login",
+        element: <Login></Login>
+      },
+      {
+        path: "register",
+        element: <Register></Register>
+      },
+      {
+        path: "dashboard",
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+      },
+      {
+        path: "/dashboard/add",
+        element: <AddPage></AddPage>
+      },
+      {
+        path: "/dashboard/edit",
+        element: <EditPage></EditPage>
+      },
 
     ]
   },
@@ -40,6 +67,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+   <AuthProvider>
    <RouterProvider router={router} />
+   </AuthProvider>
   </StrictMode>,
 )

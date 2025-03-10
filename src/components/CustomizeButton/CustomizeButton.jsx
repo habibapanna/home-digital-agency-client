@@ -91,7 +91,7 @@ const CustomizeButton = () => {
         </select>
 
         {/* Buttons */}
-        <button className="btn w-full bg-blue-600 text-white">
+        <button className="btn w-full bg-blue-600 text-white hover:bg-blue-700">
           <a
             href="https://wpastra.com/essential-toolkit-pricing/?utm_source=Digital%20Agency&utm_medium=websitedemos&utm_campaign=templatecustomizer"
             target="_blank"
