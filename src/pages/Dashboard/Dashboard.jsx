@@ -25,7 +25,7 @@ const Dashboard = () => {
           </li>
           <li className="px-4 py-3 flex items-center hover:bg-gray-700">
             <FaPlus className="mr-3" />
-            <Link to="/dashboard/add">Add Item</Link>
+            <Link to="/dashboard/add">Add Portfolio</Link>
           </li>
           <li className="px-4 py-3 flex items-center hover:bg-gray-700">
             <FaEdit className="mr-3" />
