@@ -17,6 +17,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import AddPage from './pages/AddPage/AddPage.jsx';
 import EditPage from './pages/EditPage/EditPage.jsx';
+import AllUsers from './pages/AllUsers/AllUsers.jsx';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/edit",
         element: <EditPage></EditPage>
+      },
+      {
+        path: "/dashboard/all-users",
+        element: <AllUsers></AllUsers>
       },
 
     ]
