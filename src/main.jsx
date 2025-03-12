@@ -22,53 +22,28 @@ import AllUsers from './pages/AllUsers/AllUsers.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: <Main />,
     errorElement: <h1 className='text-red-500 text-5xl font-bold'>Page is not found</h1>,
     children: [
-      {
-        path: "/",
-        element: <Home></Home>
-      },
-      {
-        path: "about",
-        element: <About></About>
-      },
-      {
-        path: "services",
-        element: <Services></Services>
-      },
-      {
-        path: "Contact",
-        element: <Contact></Contact>
-      },
-      {
-        path: "login",
-        element: <Login></Login>
-      },
-      {
-        path: "register",
-        element: <Register></Register>
-      },
-      {
-        path: "dashboard",
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
-      },
-      {
-        path: "/dashboard/add",
-        element: <AddPage></AddPage>
-      },
-      {
-        path: "/dashboard/edit",
-        element: <EditPage></EditPage>
-      },
-      {
-        path: "/dashboard/all-users",
-        element: <AllUsers></AllUsers>
-      },
-
-    ]
+      { path: "/", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "services", element: <Services /> },
+      { path: "contact", element: <Contact /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    children: [
+      { path: "add-portfolio", element: <AddPage /> },
+      { path: "edit-portfolio", element: <EditPage /> },
+      { path: "all-users", element: <AllUsers /> },
+    ],
   },
 ]);
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -7,33 +7,74 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../../src/firebase/firebase.init";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
-  const [userName, setUserName] = useState(null);
 
-  const createUser = async (email, password) => {
-    setLoading(true);
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
-    } catch (error) {
-      console.error("Firebase Auth Error:", error.code, error.message);
-      alert(error.message);
-      throw error;
-    } finally {
-      setLoading(false);
+  const saveUserToDB = async (user) => {
+    const userData = {
+      uid: user.uid,
+      name: user.displayName || "No Name",
+      email: user.email,
+      photoURL: user.photoURL || "",
+      createdAt: new Date().toISOString(),
+    };
+  
+    // Check if the user already exists in the database
+    const res = await fetch(`http://localhost:5000/users?email=${user.email}`);
+    const existingUser = await res.json();
+  
+    if (existingUser.length === 0) {
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
     }
   };
+  
+
+  const createUser = async (email, password, name) => {
+    setLoading(true);
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        if (!user) {
+            throw new Error("User creation failed. No user data returned.");
+        }
+
+        // Wait for Firebase to update the profile
+        await updateProfile(user, { displayName: name });
+
+        // Save user to DB
+        await saveUserToDB({ ...user, displayName: name });
+
+        return user;
+    } catch (error) {
+        console.error("Firebase Auth Error:", error.message);
+        alert(error.message);
+        throw error;
+    } finally {
+        setLoading(false);
+    }
+};
+
 
   const loginUser = async (email, password) => {
     setLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      // Save user to DB (if not already saved)
+      saveUserToDB(userCredential.user);
+
       return userCredential.user;
     } catch (error) {
       console.error("Login Error:", error.message);
@@ -49,7 +90,21 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const userCredential = await signInWithPopup(auth, googleProvider);
-      return userCredential.user;
+      const user = userCredential.user;
+  
+      // Ensure the user has a display name
+      const userData = {
+        uid: user.uid,
+        name: user.displayName || "Google User",
+        email: user.email,
+        photoURL: user.photoURL || "",
+        createdAt: new Date().toISOString(),
+      };
+  
+      // Save user to DB
+      await saveUserToDB(userData);
+  
+      return user;
     } catch (error) {
       console.error("Google Login Error:", error.message);
       alert(error.message);
@@ -58,16 +113,18 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+  
+
+
+  
 
   const logOutUser = async () => {
     setLoading(true);
     try {
       await signOut(auth);
       setUser(null);
-      setUserId(null);
-      setUserName(null);
     } catch (error) {
-      console.error("Error during logout", error);
+      console.error("Logout Error:", error);
     } finally {
       setLoading(false);
     }
@@ -76,22 +133,15 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setUserId(currentUser?.uid || null);
-      setUserName(currentUser?.displayName || "Guest");
       setLoading(false);
-      console.log("Auth state changed:", currentUser);
     });
 
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
     user,
-    userId,
     loading,
-    userName,
     createUser,
     loginUser,
     googleLogin,

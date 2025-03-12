@@ -21,35 +21,46 @@ const Register = () => {
     };
 
     // Handle form submission
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError(null);
-  
-      try {
-          await createUser(formData.email, formData.password);
-          
-          // Show success alert
-          Swal.fire({
-              title: "Registration Successful!",
-              text: "You have successfully registered. Welcome!",
-              icon: "success",
-              confirmButtonColor: "#6878d6",
-          }).then(() => {
-              navigate('/'); // Redirect after clicking "OK"
-          });
-  
-      } catch (err) {
-          setError(err.message);
-          
-          // Show error alert
-          Swal.fire({
-              title: "Error!",
-              text: err.message,
-              icon: "error",
-              confirmButtonColor: "#d33",
-          });
-      }
-  };
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+        const user = await createUser(formData.email, formData.password, formData.name);
+        
+        if (!user) {
+            throw new Error("User creation failed. No user data returned.");
+        }
+
+        // Send user data to backend
+        const userData = {
+            uid: user.uid, // Ensure uid exists
+            name: formData.name, 
+            email: formData.email,
+            photoURL: user.photoURL || "", 
+            createdAt: new Date().toISOString(),
+            role: "user" 
+        };
+
+        const response = await fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to save user to database.");
+        }
+
+        Swal.fire("Success!", "Registration successful!", "success");
+        navigate('/');
+    } catch (error) {
+        console.error("Registration Error:", error.message);
+        setError(error.message);
+        Swal.fire("Error!", error.message, "error");
+    }
+};
+
   
 
     return (

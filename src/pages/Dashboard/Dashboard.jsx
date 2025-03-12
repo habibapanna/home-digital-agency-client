@@ -1,65 +1,73 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaSun, FaMoon, FaTachometerAlt, FaPlus, FaEdit, FaHome, FaInfoCircle, FaEnvelope, FaServicestack, FaUserFriends } from "react-icons/fa";
+import { Outlet, NavLink } from "react-router-dom";
+import { FaBars, FaMoon, FaPlus, FaEdit, FaHome } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { HiUserGroup } from "react-icons/hi2";
+import { FiSun } from "react-icons/fi";
 
 const Dashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
-    <div>
-      {/* Sidebar */}
-      <div className="w-64 bg-[#31317b] text-white h-screen overflow-y-auto fixed">
-        <div className="flex justify-center items-center mt-5">
-          <h2 className="text-2xl font-bold text-center">Admin Dashboard</h2>
+    <div className={`flex min-h-screen ${isDarkMode ? "bg-black text-white" : "bg-white text-black"}`}>
+      {/* Sidebar Navigation */}
+      <div className={`fixed inset-y-0 left-0 bg-[#323264] text-white p-4 w-64 z-50 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0 transition-transform duration-300 ease-in-out`}> 
+        <div className="sm:hidden flex justify-end mb-4">
+          <button className="text-2xl text-white focus:outline-none" onClick={toggleSidebar}>✕</button>
         </div>
-        <ul className="mt-10 space-y-3">
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaTachometerAlt className="mr-3" />
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaUserFriends className="mr-3" />
-            <Link to="/dashboard/all-users">AllUsers</Link>
-          </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaPlus className="mr-3" />
-            <Link to="/dashboard/add">Add Portfolio</Link>
-          </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaEdit className="mr-3" />
-            <Link to="/dashboard/edit">Edit Portfolio</Link>
-          </li>
-        </ul>
-        <div className="border border-gray-500 mt-5 mb-5"></div>
-        <ul>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
+        <ul className="space-y-6">
+          <li className="flex items-center">
             <FaHome className="mr-3" />
-            <Link to="/">Home</Link>
+            <NavLink to="/" className="hover:bg-[#5d60b2] rounded px-4 py-2">Home</NavLink>
           </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaInfoCircle className="mr-3" />
-            <Link to="/about">About</Link>
+          <li className="flex items-center">
+            <FaPlus className="mr-3" />
+            <NavLink to="add-portfolio" className="hover:bg-[#5d60b2] rounded px-4 py-2">Add Portfolio</NavLink>
           </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaServicestack className="mr-3" />
-            <Link to="/services">Services</Link>
+          <li className="flex items-center">
+            <FaEdit className="mr-3" />
+            <NavLink to="edit-portfolio" className="hover:bg-[#5d60b2] rounded px-4 py-2">Edit Portfolio</NavLink>
           </li>
-          <li className="px-4 py-3 flex items-center hover:bg-gray-700">
-            <FaEnvelope className="mr-3" />
-            <Link to="/contact">Contact</Link>
+          <li className="flex items-center">
+            <HiUserGroup className="mr-3" />
+            <NavLink to="all-users" className="hover:bg-[#5d60b2] rounded px-4 py-2">All Users</NavLink>
           </li>
         </ul>
       </div>
 
       {/* Main Content */}
-      <div className="ml-64 w-full p-8">
-        <div className="bg-white dark:bg-gray-900 shadow-lg p-6 flex justify-between">
-          <div className="w-2/3">
-          <p className="text-2xl font-semibold text-gray-800 dark:text-white">Welcome to Admin Dashboard</p>
-          <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
-            From here, you can manage everything about the website, including adding, editing, and deleting content.
-          </p>
-          </div>
+      <div className="flex-1 p-4 transition-all sm:ml-64">
+        {/* Top Bar */}
+        <div className="flex justify-between items-center mb-4">
+          <button className="text-xl p-2 sm:hidden" onClick={toggleSidebar}>
+            <FaBars />
+          </button>
+          <button onClick={toggleDarkMode} className="text-xl p-2 rounded-full border border-[#323264] hover:bg-[#323264]">
+            {isDarkMode ? <FiSun className="text-yellow-400" /> : <FaMoon className="text-[#323264] hover:text-white" />}
+          </button>
         </div>
+        
+        {/* Page Content */}
+        <Outlet />
       </div>
     </div>
   );
