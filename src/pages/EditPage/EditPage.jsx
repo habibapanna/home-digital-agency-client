@@ -73,7 +73,7 @@ const EditPage = () => {
         <table className="min-w-full border-collapse border border-gray-300">
           <thead>
             <tr className="bg-[#eff2ff]">
-              <th className="border p-2 text-xs sm:text-sm">URI</th>
+              <th className="border p-2 text-xs sm:text-sm">URL</th>
               <th className="border p-2 text-xs sm:text-sm">Actions</th>
             </tr>
           </thead>
