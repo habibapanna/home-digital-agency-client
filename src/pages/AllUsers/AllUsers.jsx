@@ -5,13 +5,13 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://home-digital-agency-server.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://home-digital-agency-server.vercel.app/users/admin/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

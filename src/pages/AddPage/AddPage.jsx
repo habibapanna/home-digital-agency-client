@@ -10,7 +10,7 @@ const AddPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/portfolios", { URI });
+      await axios.post("https://home-digital-agency-server.vercel.app/portfolios", { URI });
       
       // Show success message
       Swal.fire({

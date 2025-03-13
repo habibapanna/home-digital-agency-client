@@ -51,7 +51,7 @@ const EditPage = () => {
   const handleUpdate = () => {
     if (!selectedPortfolio) return;
     axios
-      .put(`http://localhost:5000/portfolios/${selectedPortfolio._id}`, {
+      .put(`https://home-digital-agency-server.vercel.app/portfolios/${selectedPortfolio._id}`, {
         URI: updatedURI,
       })
       .then(() => {

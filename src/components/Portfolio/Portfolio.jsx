@@ -16,7 +16,7 @@ const Portfolio = () => {
   const [portfolios, setPortfolios] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/portfolios") // Fetch portfolios from backend
+    axios.get("https://home-digital-agency-server.vercel.app/portfolios") // Fetch portfolios from backend
       .then((response) => setPortfolios(response.data))
       .catch((error) => console.error("Error fetching portfolios:", error));
   }, []);

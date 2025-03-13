@@ -25,11 +25,11 @@ const AuthProvider = ({ children }) => {
     };
   
     // Check if the user already exists in the database
-    const res = await fetch(`http://localhost:5000/users?email=${user.email}`);
+    const res = await fetch(`https://home-digital-agency-server.vercel.app/users?email=${user.email}`);
     const existingUser = await res.json();
   
     if (existingUser.length === 0) {
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://home-digital-agency-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
